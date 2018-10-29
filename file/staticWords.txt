@@ -1,0 +1,49 @@
+cc
+gcc
+echo
+@echo
+include
+endif
+else
+
+ifneq#else#endif
+ifneq#endif
+ifeq#else#endif
+ifeq#endif
+ifndef#else#endif
+ifndef#endif
+ifdef#else#endif
+ifdef#endif
+
+export
+unexport
+MAKEFLAGS
+VPATH
+
+
+$(subst <from>,<to>,<text>)
+$(patsubst <pattern>,<replacement>,<text>)
+$(strip <string>)
+$(findstring <find>,<in>)
+$(filter <pattern...>,<text>)
+$(filter-out <pattern...>,<text>)
+$(sort <list>)
+$(word <n>,<text>)
+$(wordlist <ss>,<e>,<text>)
+$(words <text>)
+$(firstword <text>)
+$(dir <names...>)
+$(notdir <names...>)
+$(suffix <names...>)
+$(basename <names...>)
+$(addsuffix <suffix>,<names...>)
+$(addprefix <prefix>,<names...>)
+$(join <list1>,<list2>)
+$(foreach <var>,<list>,<text>)
+$(if <condition>,<then-part>)
+$(if <condition>,<then-part>,<else-part>)
+$(call <expression>,<parm1>,<parm2>,...,<parmn>)
+$(origin <variable>)
+$(shell <command> <param1>,<parm2>,...,<parmn>)
+$(error <text ...>)
+$(warning <text ...>)
