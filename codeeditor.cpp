@@ -36,7 +36,7 @@ CodeEditor::CodeEditor(QString rootPath,QWidget *parent) : QTextEdit(parent), co
     this->staticCptList = dir.entryList(filter,QDir::Files|QDir::NoDotAndDotDot,QDir::Name);
 
     //set static complete
-    initStaticCptModel(rootPath+"\\file\\staticWords.txt");
+    initStaticCptModel(QDir::currentPath()+"\\file\\staticWords.txt");
 
     //signal
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
@@ -103,6 +103,7 @@ QString CodeEditor::textUnderCursor() const
     tc2.movePosition(QTextCursor::StartOfWord,QTextCursor::MoveAnchor);
     int wordStartPosision=tc2.positionInBlock();
     if(wordStartPosision==0){
+
         return textUnder;
     }else {
         QString textInBlock=tc2.block().text();
@@ -410,38 +411,46 @@ void CodeEditor::highlightErrorLine(int index)
 //    this->textCursor().setPosition(posisionNow);
 }
 
-/*
+
 int CodeEditor::analyzeMakefile(){
+//    return -1;
     QTextBlock block=this->document()->begin();
     int i=0;
     QStack<int> locStack;
     QStack<QString> strStack;
     bool alineOver=true;
+
     while (i<this->document()->blockCount()){
         QString aline=block.text();
-//        qDebug()<<">: "<<aline;
-        if(aline.trimmed()==""){
-            qDebug()<<"-: "<<aline;
+        if(!aline.isNull() && aline.trimmed()==""){
+//            qDebug()<<"-: "<<aline;
             block=block.next();
             i++;
             continue;
         }
-        qDebug()<<"+: "<<aline;
+//        qDebug()<<"+: "<<aline;
         QStringList sList=splitAline(aline);
+        if(sList.size()==0){
+            block=block.next();
+            i++;
+            continue;
+        }
 
-
+        if(alineOver){
+            locStack.clear();
+            strStack.clear();
+        }
         for(int j=0;j<sList.size();j++){
             if(sList.at(j)=="("){
                 locStack.push(i);
                 strStack.push(")");
-            }else if(sList.at(j)==strStack.top()){
-                if(kuohaoStack.isEmpty()){
+            }else if(sList.at(j) == ")"){
+                if(strStack.isEmpty()){
                     return i;
                 }else{
                     locStack.pop();
                     strStack.pop();
                 }
-
             }
         }
 
@@ -465,9 +474,9 @@ int CodeEditor::analyzeMakefile(){
 
     return -1;
 }
-*/
 
 
+/*
 int CodeEditor::analyzeMakefile(){
     QTextBlock block=this->document()->begin();
     int i=0;
@@ -514,7 +523,7 @@ int CodeEditor::analyzeMakefile(){
 
     return -1;
 }
-
+*/
 
 
 void CodeEditor::updateCptModelDynamic(QSet<QString> stringset,bool eraseold){

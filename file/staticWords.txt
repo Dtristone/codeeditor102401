@@ -1,10 +1,12 @@
-cc
-gcc
 echo
-@echo
 include
 endif
 else
+
+ECHO
+INCLUDE
+ENDIF
+ELSE
 
 ifneq#else#endif
 ifneq#endif
@@ -17,6 +19,11 @@ ifdef#endif
 
 export
 unexport
+makeflags
+vpath
+
+EXPORT
+UNEXPORT
 MAKEFLAGS
 VPATH
 

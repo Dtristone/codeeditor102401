@@ -25,10 +25,11 @@ MainWindow::MainWindow(QWidget *parent) :
 {
     ui->setupUi(this);
     this->projectPath=QDir::currentPath();
+    this->openedProjectPath=projectPath;
     initMenu();
     initTabPage();
 
-    this->resize(1000,800);
+    this->resize(1500,1000);
     dock = new QDockWidget(tr("Project Dir"), this);
     dock->setAllowedAreas(Qt::LeftDockWidgetArea | Qt::RightDockWidgetArea);
     createFileDirDock("", dock);

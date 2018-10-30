@@ -40,6 +40,8 @@ private:
     QFileSystemModel *fsmodel;
     QString projectPath;
     QLabel *messageLabel;
+    QString openedProjectPath;
+
 
     QLineEdit *findLineEdit;
     QDialog *findDlg;
@@ -90,6 +92,7 @@ private:
     void remainSave();
 
     CodeEditor *currentEditor;
+
     QString curFile;
 
     map<int, QString> map_for_save;
